@@ -1,0 +1,153 @@
+/* TABLETS */
+
+@media (max-width: 1024px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .users-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .toolbar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .favorite-filter {
+        grid-column: 1 / -1;
+    }
+
+}
+
+/* MOBILE DEVICES */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .header-content {
+        min-height: 65px;
+        flex-wrap: wrap;
+        padding: 12px 0;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .header-status {
+        font-size: 11px;
+    }
+
+    .main-content {
+        padding-top: 25px;
+    }
+
+    .welcome-section {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-card h2 {
+        font-size: 23px;
+    }
+
+    .users-section {
+        padding: 17px;
+    }
+
+    .section-heading h2 {
+        font-size: 21px;
+    }
+
+    .toolbar {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .favorite-filter {
+        grid-column: auto;
+    }
+
+    .users-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-tabs {
+        gap: 7px;
+    }
+
+    .category-btn {
+        padding: 7px 11px;
+        font-size: 12px;
+    }
+
+    .error-banner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .about-section {
+        padding: 18px;
+    }
+
+}
+
+/* SMALL MOBILE DEVICES */
+
+@media (max-width: 360px) {
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .header-status {
+        display: none;
+    }
+
+}
+
+/* REDUCED MOTION ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
