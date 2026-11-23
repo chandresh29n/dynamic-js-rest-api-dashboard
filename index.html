@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="A dynamic user dashboard powered by JavaScript ES6 and REST API integration.">
+
+    <title>Dynamic Dashboard | User Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script type="module" src="js/app.js"></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+
+            <a href="index.html" class="logo" aria-label="Dynamic Dashboard home">
+                <span class="logo-icon">D</span>
+                <span>Dynamic<span class="logo-highlight">Board</span></span>
+            </a>
+
+            <nav aria-label="Main navigation">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#users" class="nav-link">Users</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+
+            <div class="header-status">
+                <span class="status-dot"></span>
+                <span>API Dashboard</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="container main-content" id="dashboard">
+
+        <section class="welcome-section">
+            <div>
+                <p class="eyebrow">MANAGEMENT OVERVIEW</p>
+                <h1>Dashboard Overview</h1>
+                <p class="welcome-description">
+                    Explore, search and manage live user information.
+                </p>
+            </div>
+
+            <button id="refreshBtn" class="btn btn-primary" type="button">
+                <span aria-hidden="true">↻</span>
+                Refresh Data
+            </button>
+        </section>
+
+        <section class="stats-grid" aria-label="Dashboard statistics">
+
+            <article class="stat-card">
+                <span class="stat-label">Total Users</span>
+                <h2 id="totalUsers">--</h2>
+                <p>Users from REST API</p>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">Filtered Results</span>
+                <h2 id="filteredUsers">--</h2>
+                <p>Currently displayed</p>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">Favorite Users</span>
+                <h2 id="favoriteUsers">0</h2>
+                <p>Saved locally</p>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">API Status</span>
+                <h2 id="apiStatus" class="status-text">Waiting</h2>
+                <p id="lastUpdated">Not connected yet</p>
+            </article>
+
+        </section>
+
+        <section id="users" class="users-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">USER DIRECTORY</p>
+                    <h2>Explore Users</h2>
+                    <p>Find users using search, categories and sorting.</p>
+                </div>
+            </div>
+
+            <div class="toolbar">
+
+                <div class="search-wrapper">
+                    <label for="searchInput">Search users</label>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search by name, email or company..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="sort-wrapper">
+                    <label for="sortSelect">Sort by</label>
+                    <select id="sortSelect">
+                        <option value="name-asc">Name: A to Z</option>
+                        <option value="name-desc">Name: Z to A</option>
+                        <option value="company-asc">Company: A to Z</option>
+                        <option value="email-asc">Email: A to Z</option>
+                    </select>
+                </div>
+
+                <div class="favorite-filter">
+                    <label for="favoritesOnly">Favorites only</label>
+                    <input type="checkbox" id="favoritesOnly">
+                </div>
+
+            </div>
+
+            <div class="category-section">
+                <h3>Filter by City</h3>
+
+                <div
+                    id="categoryTabs"
+                    class="category-tabs"
+                    role="group"
+                    aria-label="Filter users by city"
+                >
+                    <button class="category-btn active" type="button" data-city="all">
+                        All Cities
+                    </button>
+                </div>
+            </div>
+
+            <div
+                id="errorBanner"
+                class="error-banner"
+                role="alert"
+                hidden
+            >
+                <div>
+                    <strong>Unable to load data</strong>
+                    <p id="errorMessage">
+                        Please check your internet connection.
+                    </p>
+                </div>
+
+                <button id="retryBtn" class="btn btn-retry" type="button">
+                    Try Again
+                </button>
+            </div>
+
+            <div
+                id="loadingSkeleton"
+                class="users-grid"
+                aria-label="Loading users"
+                aria-busy="true"
+                hidden
+            >
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+
+            <div
+                id="usersGrid"
+                class="users-grid"
+                aria-live="polite"
+                aria-busy="false"
+            >
+            </div>
+
+            <div id="emptyState" class="empty-state" hidden>
+                <h3>No users found</h3>
+                <p>Try changing your search or filter settings.</p>
+                <button id="clearFiltersBtn" class="btn btn-primary" type="button">
+                    Clear Filters
+                </button>
+            </div>
+
+            <p id="resultsInfo" class="results-info" aria-live="polite">
+                Waiting for user data...
+            </p>
+
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About This Dashboard</h2>
+            <p>
+                This application demonstrates modern JavaScript development
+                using asynchronous REST API requests, dynamic DOM manipulation,
+                real-time filtering, sorting and browser-based LocalStorage.
+            </p>
+            <p>
+                Data source:
+                <a href="https://jsonplaceholder.typicode.com/users"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    JSONPlaceholder REST API
+                </a>
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>
+                &copy; 2026 DynamicBoard.
+                Built with HTML5, CSS3 and JavaScript ES6+.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
